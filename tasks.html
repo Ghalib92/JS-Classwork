@@ -11,13 +11,27 @@
     <button id="add-task">Add Task</button>
     <ul id="task-list"></ul>
     <script>
-
+        // Get references to DOM elements
 const taskInput = document.getElementById('task-input');
 const addTaskButton = document.getElementById('add-task');
 const taskList = document.getElementById('task-list');
 
 // Initialize an empty array to store tasks
 let tasks = [];
+
+// Function to load tasks from Local Storage
+function loadTasks() {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+        tasks = JSON.parse(storedTasks);
+        displayTasks();
+    }
+}
+
+// Function to save tasks to Local Storage
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 // Function to add a new task
 function addTask() {
@@ -26,29 +40,34 @@ function addTask() {
         tasks.push(task);
         taskInput.value = '';  // Clear the input field
         displayTasks();        // Update the task list display
+        saveTasks();           // Save tasks to Local Storage
     }
 }
 
-// Function to display 
+// Function to display tasks
 function displayTasks() {
     // Clear the current task list
     taskList.innerHTML = '';
-    
+
     // Iterate over the tasks array and create list items for each task
     tasks.forEach(function(task, index) {
+        // Create a list item (li) element
         const li = document.createElement('li');
+        // Set the text content of the list item to the task
         li.textContent = task;
-        
+
         // Create a remove button for each task
         const removeButton = document.createElement('button');
+        // Set the button text to 'Remove'
         removeButton.textContent = 'Remove';
+        // Add an event listener to the remove button
         removeButton.addEventListener('click', function() {
-            removeTask(index); // Remove task when button is clicked
+            // Remove task when button is clicked
+            removeTask(index);
         });
-        
+
         // Append the remove button to the list item
         li.appendChild(removeButton);
-        
         // Append the list item to the task list
         taskList.appendChild(li);
     });
@@ -58,11 +77,15 @@ function displayTasks() {
 function removeTask(index) {
     tasks.splice(index, 1); // Remove the task at the specified index
     displayTasks();         // Update the task list display
+    saveTasks();            // Save tasks to Local Storage
 }
 
 // Add event listener to the "Add Task" button
 addTaskButton.addEventListener('click', addTask);
-    </script>
+
+// Load tasks from Local Storage when the page loads
+loadTasks();
+ </script>
 
 
 

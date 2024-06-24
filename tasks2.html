@@ -22,6 +22,21 @@ const addUnitButton= document.getElementById("add-unit");
 const unitList = document.getElementById("unit-list");
 
 let units = [];
+
+function loadUnits() {
+     const storedUnits = localStorage.getItem("units");
+     if(storedUnits){
+
+        units= JSON.parse(storedUnits);
+        displayInput();
+     }
+}
+
+function saveUnits(){
+
+    localStorage.setItem("units", JSON.stringify(units));
+}
+
 function addUnit(){
     const unit =  unitInput.value.trim(); 
 if(unit){
@@ -30,6 +45,7 @@ units.push(unit);
 
 unitInput.value='';
 displayInput();
+saveUnits()
 }
   
 }
@@ -54,7 +70,8 @@ function displayInput(){
     });
     function removeUnit(index) {
     units.splice(index, 1); 
-    displayInput();         
+    displayInput(); 
+    saveUnits()        
 }
 
 
@@ -62,7 +79,7 @@ function displayInput(){
 }
 addUnitButton.addEventListener('click', addUnit);
 
-    
+loadUnits();   
 
     </script>
 </body>
