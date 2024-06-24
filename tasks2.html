@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Units</title>
+</head>
+<body>
+  <h1>My total  units</h1>
+    <input type="text" id="unit-input" placeholder="Enter new Unit">
+    <button id="add-unit">Add Unit</button>
+    <ul id="unit-list"></ul>
+
+
+
+
+    <script>
+
+
+const  unitInput= document.getElementById("unit-input");
+const addUnitButton= document.getElementById("add-unit");
+const unitList = document.getElementById("unit-list");
+
+let units = [];
+function addUnit(){
+    const unit =  unitInput.value.trim(); 
+if(unit){
+
+units.push(unit);
+
+unitInput.value='';
+displayInput();
+}
+  
+}
+function displayInput(){
+
+
+    unitList.innerHTML = '';
+    units.forEach( (unit ,index)=> {
+        const li =  document.createElement('li');
+        li.textContent = unit;
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove Unit';
+
+        removeButton.addEventListener('click', ()=> {
+            removeUnit(index);
+        });
+
+        li.appendChild(removeButton);
+        unitList.appendChild(li);
+        
+    });
+    function removeUnit(index) {
+    units.splice(index, 1); 
+    displayInput();         
+}
+
+
+
+}
+addUnitButton.addEventListener('click', addUnit);
+
+    
+
+    </script>
+</body>
+</html>

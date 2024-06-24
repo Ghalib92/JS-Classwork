@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Division Calculator</title>
+    <style>
+        body{
+            font-size: 30px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(130, 170, 157);
+            font-family: 'Courier New', Courier, monospace;
+        }
+        body,button,input{
+            padding: 2rem;
+            border-radius: 2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Student Division Calculator</h1>
+    <form id="scoreForm">
+        <label for="subject1">Subject 1:</label>
+        <input type="number" id="subject1" name="subject1" required><br><br>
+        <label for="subject2">Subject 2:</label>
+        <input type="number" id="subject2" name="subject2" required><br><br>
+        <label for="subject3">Subject 3:</label>
+        <input type="number" id="subject3" name="subject3" required><br><br>
+        <label for="subject4">Subject 4:</label>
+        <input type="number" id="subject4" name="subject4" required><br><br>
+        <label for="subject5">Subject 5:</label>
+        <input type="number" id="subject5" name="subject5" required><br><br>
+        <button type="button" onclick="calculateDivision()">Calculate Division</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        function getStudentDivision(score) {
+            if (score >= 70) {
+                return 'First Class';
+            } else if (score >= 60) {
+                return 'Second Class';
+            } else if (score >= 50) {
+                return 'Third Class';
+            } else if (score >= 40) {
+                return 'Pass';
+            } else {
+                return 'Fail';
+            }
+        }
+
+        function calculateDivision() {
+            // Get the input values
+            let subject1 = parseFloat(document.getElementById('subject1').value);
+            let subject2 = parseFloat(document.getElementById('subject2').value);
+            let subject3 = parseFloat(document.getElementById('subject3').value);
+            let subject4 = parseFloat(document.getElementById('subject4').value);
+            let subject5 = parseFloat(document.getElementById('subject5').value);
+
+            // Calculate the average score
+            let averageScore = (subject1 + subject2 + subject3 + subject4 + subject5) / 5;
+
+            // Get the division based on the average score
+            let division = getStudentDivision(averageScore);
+
+            // Display the result
+            document.getElementById('result').innerText = `Average Score: ${averageScore}, Division: ${division}`;
+        }
+    </script>
+</body>
+</html>

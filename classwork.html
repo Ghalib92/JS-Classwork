@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="button"] {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background-color: #218838;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="ageForm">
+        <h1>Age Calculator</h1>
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="dob">Select your date of birth:</label>
+        <input type="date" id="dob" name="dob" required><br><br>
+        
+        <input type="button" value="Calculate Age" onclick="calculateAge()">
+    </form>
+    
+    <p id="output"></p>
+    
+    <script>
+        function calculateAge() {
+            const name = document.getElementById('name').value;
+            const dob = new Date(document.getElementById('dob').value);
+            const today = new Date();
+            
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDifference = today.getMonth() - dob.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            
+           
+            
+            const output = `Hello, ${name}! You are ${age} years old.`;
+            document.getElementById('output').innerText = output;
+        }
+    </script>
+</body>
+</html>

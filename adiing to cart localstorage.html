@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding to cart</title>
+    <style>
+        body{
+            background-color: rgb(201, 235, 235);
+            margin-left: 6rem;
+        }
+        #add-to-cart{
+            padding: 20px;
+            background-color: bisque;
+            border-radius: 10px;
+            box-shadow:2px 0 8px black;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .cart {
+            margin: 20px 0;
+        }
+        .cart-count {
+            font-size: 1.5em;
+            margin-left: 10px;
+            color: green;
+        }
+        #less-cart, #reset-cart, #calculate {
+            padding: 20px;
+            background-color: bisque;
+            margin-left: 2rem;
+            border-radius: 10px;
+            box-shadow: 2px 0 8px black;
+        }
+        #add-to-cart, #less-cart, #reset-cart, #calculate:hover {
+            cursor: pointer;
+            background-color: bisque;
+        }
+        .js-input {
+            padding: 20px;
+            background-color: rgb(216, 198, 198);
+            font-size: 20px;
+            border-radius: 80px;
+        }
+        .my-total {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 30px;
+            color: rgb(132, 141, 141);
+        }
+        #totals {
+            font-weight: bolder;
+            font-size: 30px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Shopping Cart</h1>
+    <button id="add-to-cart">Add to Cart</button>
+    <button id="less-cart">Remove from cart</button>
+    <button id="reset-cart">Reset cart</button>
+    <p class="cart">
+        Items in Cart: <span id="cart-count" class="cart-count">0</span>
+    </p>
+    <h2>Enter Item Price</h2>
+    <input type="text" placeholder="Amount in ksh" class="js-input">
+    <br><br>
+    <button id="calculate">Calculate</button>
+    <h2 class="my-total">The total is Ksh. <span id="totals">0</span></h2>
+    <script>
+        const resetButton = document.getElementById("reset-cart");
+        const addToCartButton = document.getElementById('add-to-cart');
+        const cartCountDisplay = document.getElementById('cart-count');
+        const lessButton = document.getElementById('less-cart');
+        const calculateButton = document.getElementById('calculate');
+
+        // Initialize the cart count
+        let cartCount = localStorage.getItem('cartCount');
+
+        if (cartCount === null) {
+            cartCount = 0;
+        } else {
+            cartCount = parseInt(cartCount, 10);
+        }
+
+        // Update the display with the initial cart count
+        cartCountDisplay.textContent = cartCount;
+
+        // Function to handle resetting the cart count
+        function resetToCart() {
+            cartCount = 0;
+            cartCountDisplay.textContent = cartCount;
+            localStorage.setItem('cartCount', cartCount);
+        }
+
+        // Function to handle adding to the cart count
+        function addToCart() {
+            cartCount++;
+            cartCountDisplay.textContent = cartCount;
+            localStorage.setItem('cartCount', cartCount);
+        }
+
+        // Function to handle removing from the cart count
+        function lessToCart() {
+            if (cartCount > 0) {
+                cartCount--;
+                cartCountDisplay.textContent = cartCount;
+                localStorage.setItem('cartCount', cartCount);
+            }
+        }
+
+        // Function to calculate the total price
+        function calculate() {
+            const price = document.querySelector('.js-input').value;
+            const total = price * cartCount;
+            const totalDisplay = document.getElementById('totals');
+            totalDisplay.textContent = ` ${total}`;
+        }
+
+        // Add event listeners to the buttons
+        addToCartButton.addEventListener('click', addToCart);
+        lessButton.addEventListener('click', lessToCart);
+        resetButton.addEventListener('click', resetToCart);
+        calculateButton.addEventListener('click', calculate);
+    </script>
+</body>
+</html>

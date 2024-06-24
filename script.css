@@ -1,0 +1,35 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(0, 0, 124);
+}
+.js-quantity, .js-input{
+padding: 20px;
+border-width: 4px;
+border-radius: 30px;
+font-size: 2rem;
+text-align: center;
+background-color: rgb(207, 198, 198);
+margin-left: 3rem;
+}
+.js-quantity, .js-input::placeholder{
+font-size: 1.5rem;
+ 
+
+}
+.calculate{
+
+
+    padding: 20px;
+    border-width: 4px;
+    border-radius: 78px;
+    font-size: 15px;
+    text-align: center;
+    background-color: rgb(207, 198, 198);
+    margin-left: 7rem;
+
+    margin-right: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: large;
+    font-weight: bolder;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Odd Numbers from 0 to 40</title>
+</head>
+<body>
+    <h1>Odd Numbers from 0 to 40</h1>
+    <ul id="oddNumbersList"></ul>
+
+    <script>
+        function logOddNumbers() {
+            // Get the list element
+            const list = document.getElementById('oddNumbersList');
+
+            // Use a for loop to iterate through numbers from 0 to 40
+            for (let i = 0; i <= 40; i++) {
+                // Check if the number is odd
+                if (i % 2 !== 0) {
+                    // Log the odd number and add it to the list
+                    console.log(i);
+                    const listItem = document.createElement('li');
+                    listItem.textContent = i;
+                    list.appendChild(listItem);
+                }
+            }
+        }
+
+        // Execute the function to log and display odd numbers
+        logOddNumbers();
+    </script>
+</body>
+</html>
